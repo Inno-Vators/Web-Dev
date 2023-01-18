@@ -26,22 +26,27 @@
                     <div class="sidebar-brand-text mx-3"><span class="text-wrap"> Welcome {{auth()->user()->username}}</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="{{route('home.dashboard')}}"><i class="fas fa-tachometer-alt"></i><span>Home</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('home.profile', auth()->user()->id)}}"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('home.leaderboard')}}"><i class="fas fa-table"></i><span>Leaderboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('home.course')}}"><i class="bi bi-book"></i><span>Course</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('home.test')}}"><i class="bi bi-pencil-square"></i></i><span>Test Question</span></a></li>
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <hr>
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href=""><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fa fa-users"></i><span>Users</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.courses.index') }}"><i class="bi bi-book"></i><span>Courses</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.message.index') }}"><i class="fa fa-comments-o"></i><span>Inbox</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-sign-out"></i></i><span>Log Out</span></a></li>
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                </ul>
+                @if (auth()->user()->is_admin = 0)
+                    <ul class="navbar-nav text-light" id="accordionSidebar">
+                        <li class="nav-item"><a class="nav-link" href="{{route('home.dashboard')}}"><i class="fas fa-tachometer-alt"></i><span>Home</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('home.profile', auth()->user()->id)}}"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('home.leaderboard')}}"><i class="fas fa-table"></i><span>Leaderboard</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('home.course')}}"><i class="bi bi-book"></i><span>Course</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('home.test')}}"><i class="bi bi-pencil-square"></i></i><span>Test Question</span></a></li>
+                    <ul class="navbar-nav text-light" id="accordionSidebar">
+                @endif
+                    {{-- <hr> --}}
+
+                @if (auth()->user()->is_admin = 1)
+                    <ul class="navbar-nav text-light" id="accordionSidebar">
+                        <li class="nav-item"><a class="nav-link" href=""><i class="fas fa-user"></i><span>Profile</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fa fa-users"></i><span>Users</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.courses.index') }}"><i class="bi bi-book"></i><span>Courses</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.message.index') }}"><i class="fa fa-comments-o"></i><span>Inbox</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-sign-out"></i></i><span>Log Out</span></a></li>
+                    <ul class="navbar-nav text-light" id="accordionSidebar">
+                @endif
+
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
