@@ -40,14 +40,15 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'surname' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:users,username',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8',
+            'password' => 'required|confirmed|min:8',
             'nationality' => 'required',
             'gender' => 'required',
             'dob' => 'required',
-            'image' => 'mimes:jpg,png,jpeg'
+            'image' => 'required|mimes:jpg,png,jpeg'
         ]);
+        $img_dir = $request->file('image')->store('user_images', 'public');
 
         DB::beginTransaction();
 
@@ -60,10 +61,12 @@ class UserController extends Controller
             'nationality' => $request->input('nationality'),
             'gender' => $request->input('gender'),
             'dob' => $request->input('dob'),
-            'image' => $request->input('image')
+            'image' => $img_dir
+
+
         ]);
         DB::commit();
-        return redirect()->back()->withInput($request->input())->with('message', 'Account Register Success');
+        return redirect()->intended('home')->with('message', 'Account Registered Success');
         DB::rollBack();
 
     }
@@ -74,43 +77,24 @@ class UserController extends Controller
      * @return User
      */
 
-    public function loginUser(Request $request) {
-        try {
-            //code...
-            $validateUser = Validator::make($request->all(),
-                [
-                    'email' => 'required|email',
-                    'password' => 'required'
-                ]);
+    public function loginUser(Request $request)
+    {
 
-                if($validateUser->fails()){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Validation Error',
-                    'errors' => $validateUser->errors()
-                ], 401);
-                }
+        //code...
+        $validateUser = $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required'
+            ]
+        );
 
-                if(!Auth::attempt($request->only(['email', 'password']))){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Email and Password does not match with our record.'
-                ], 401);
-                }
 
-            $user = User::where('email', $request->email)->first();
 
-            return response()->json([
-                'status' => true,
-                'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
-            ], 500);
+        if (Auth::attempt($request->only(['email', 'password']))) {
+            return redirect()->intended('home')->with('message', 'Login Success');
         }
+
+        return redirect()->back()->with('message','Invalid username or password');
     }
 
 

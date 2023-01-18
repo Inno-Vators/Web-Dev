@@ -15,27 +15,36 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     //
-    public function createUser(Request $request) {
+    public function createUser(Request $request)
+    {
+
         // $validateRequest = Validator::make(
         // $request->all(),
         //     [
 
         //     ]);
-
-        $request->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'username' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8',
-            'nationality' => 'required',
-            'gender' => 'required',
-            'dob' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg'
-        ]);
-
-        DB::beginTransaction();
         try {
+            $validateUser = Validator::make($request->all(),[
+                'name' => 'required',
+                'surname' => 'required',
+                'username' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:8',
+                'nationality' => 'required',
+                'gender' => 'required',
+                'dob' => 'required',
+                'image' => 'mimes:jpg,png,jpeg'
+            ]);
+
+            if($validateUser->fails()){
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation Error',
+                'errors' => $validateUser->errors()
+        ], 401);
+        }
+
+
             $user = User::create([
                 'name' => $request->input('name'),
                 'surname' => $request->input('surname'),
@@ -47,15 +56,15 @@ class UserController extends Controller
                 'dob' => $request->input('dob'),
                 'image' => $request->input('image')
             ]);
-            DB::commit();
+
             return response()->json([
                 'status' => true,
                 'message' => 'Account Created Successfully',
                 'data' => $user,
                 'token' => $user->createToken('API TOKEN')->plainTextToken
             ]);
+
         } catch (\Throwable $th) {
-            DB::rollBack();
             return response()->json([
                 'status' => false,
                 'message' => 'Server Error',
@@ -64,7 +73,9 @@ class UserController extends Controller
         }
     }
 
-    public function loginUser(Request $request) {
+    public function loginUser(Request $request)
+    {
+
         try {
             //code...
             $validateUser = Validator::make($request->all(),
@@ -101,5 +112,35 @@ class UserController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+    }
+
+    public function editProfile(Request $request, $id)
+    {
+        $input = $request->all();
+        $user = User::findOrFail($id);
+        $valid = Validator::make($request->all(),[
+            'name' => ['required'],
+            'surname' => ['required'],
+            'username' => ['required', Rule::unique('users')->ignore($user)],
+            'email' => ['required', Rule::unique('users')->ignore($user)],
+            'password' => 'required|confirmed|min:8',
+            'nationality' => ['required'],
+            'gender' => ['required'],
+            'dob' => ['required'],
+            'image' => ['nullable', 'mimes:jpg,png,jpeg']
+        ]);
+
+        if ($valid->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'validation error',
+                'errors' => $valid->errors()
+            ], 401);
+        }
+        $user->update($input, );
+        return response()->json([
+            'status' => true,
+            'message' => 'Post Updated Successfully',
+        ], 200);
     }
 }
