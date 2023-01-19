@@ -26,7 +26,7 @@
                     <div class="sidebar-brand-text mx-3"><span class="text-wrap"> Welcome {{auth()->user()->username}}</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
-                @if (auth()->user()->is_admin = 0)
+                @if (auth()->user()->is_admin = 1)
                     <ul class="navbar-nav text-light" id="accordionSidebar">
                         <li class="nav-item"><a class="nav-link" href="{{route('home.dashboard')}}"><i class="fas fa-tachometer-alt"></i><span>Home</span></a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('home.profile', auth()->user()->id)}}"><i class="fas fa-user"></i><span>Profile</span></a></li>
@@ -37,7 +37,7 @@
                 @endif
                     {{-- <hr> --}}
 
-                @if (auth()->user()->is_admin = 1)
+                @if (auth()->user()->is_admin = 0)
                     <ul class="navbar-nav text-light" id="accordionSidebar">
                         <li class="nav-item"><a class="nav-link" href=""><i class="fas fa-user"></i><span>Profile</span></a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fa fa-users"></i><span>Users</span></a></li>
@@ -59,14 +59,14 @@
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-lg-inline me-2 text-gray-600 small fw-bold">{{auth()->user()->name}} {{auth()->user()->surname}}</span><img class="border rounded-circle img-profile img-fluid" src="{{asset('storage/'.auth()->user()->image)}}"></a>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                                        @if (auth()->user()->is_admin = 0)
+                                        @if (auth()->user()->is_admin = 1)
                                         <a class="dropdown-item" href="{{route('home.profile')}}"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
                                         <a class="dropdown-item" href="{{route('home.editprofile', auth()->user()->id)}}"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a>
                                         <a class="dropdown-item" href="{{route('home.leaderboard')}}"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Leaderboard</a>
                                         <div class="dropdown-divider"></div><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                         @endif
 
-                                        @if (auth()->user()->is_admin = 1)
+                                        @if (auth()->user()->is_admin = 0)
                                         <a class="dropdown-item" href="{{route('admin.users.index')}}"><i class="fas fa-users fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Users</a>
                                         <a class="dropdown-item" href="{{route('home.editprofile', auth()->user()->id)}}"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a>
                                         <a class="dropdown-item" href="{{route('admin.message.index')}}"><i class="fas fa fa-comments-o fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Messages</a>
