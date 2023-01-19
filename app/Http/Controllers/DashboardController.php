@@ -199,6 +199,11 @@ class DashboardController extends Controller
         return view('admin.users.index', ['user' => $user], ['users' => $users]);
     }
 
+    public function logOut(Request $request) {
+        $request->session()->flush();
+        return redirect()->route('login');
+    }
+
     // public function logOut(Request $request) {
     // {
     //     $user = auth()->user();

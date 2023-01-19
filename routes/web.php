@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/createquestion', [DashboardController::class, 'createQuestion'])->name('createquestion');
     // Route::get('/questions', [QuestionController::class, 'create'])->name('questions');
 
-
+    Route::get('logout', [DashboardController::class, 'logOut'])->name('logout');
 
 
 
