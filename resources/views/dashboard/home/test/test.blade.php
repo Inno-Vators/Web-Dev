@@ -16,12 +16,17 @@
 
                                 <strong>Question: {{ $question->question }} </strong>
                                 <div class="mt-3"></div>
-
-                                <input type="number" value="{{ $question->id }}" class="form-control" name="question" required hidden>
+                                
+                                <input type="number" value="{{ $question->id }}" class="form-control" name="question_id" required hidden>
 
                                 <div class="form-check">
                                 @foreach($question->options as $option)
-                                <input class="form-check-input" type="radio" name="answer" id="{{ $option->option }}" value="{{ $option->id }}">
+                                    <input class="form-control" type="number" name="option_id" id="{{ $option->id }}" value="{{ $option->id }}" required hidden>
+
+                                    <input class="form-control" type="number" name="status" id="{{ $option->status }}" value="{{ $option->status }}" required hidden>
+
+
+                                    <input class="form-check-input" type="radio" name="option" id="{{ $option->option }}" value="{{ $option->option }}">
 
                                     <label class="form-check-label " for="{{ $option->option }}">
                                         {{ $option->option }}

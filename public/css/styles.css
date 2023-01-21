@@ -21,6 +21,14 @@
 
 }
 
+#track{
+    margin-top: 15%;
+}
+
+#section2{
+    margin-top: 130px
+}
+
 #learn
 {
     color: #8482FF;
@@ -35,6 +43,10 @@
 .icons
 {
     width: 25px;
+}
+
+.buttons{
+    margin-left: 100px;
 }
 
 #btn1
@@ -210,5 +222,46 @@
 {
     color: #8482FF;
     background-color: #FFFFFF;
+
+}
+
+
+@media only screen and (max-width: 500px) {
+    #img1{
+        position: relative;
+        left: 15%;
+        margin-top: -30px;
+        margin-bottom: 10px;
+    }
+
+    .hero123{
+        margin-left: 20%;
+    }
+
+    #hero-text{
+        margin-top: -20%;
+    }
+
+    #btn1{
+        margin-left: -100px;
+    }
+
+    .buttons{
+        margin-left: 0px;
+    }
+
+    #section2{
+        margin-top: 0px;
+    }
+
+    #sign{
+        font-size: 15px;
+        width: 100px;
+        margin-left: 35%;
+    }
+
+    #track{
+        margin-top: 1px;
+    }
 
 }

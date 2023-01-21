@@ -17,11 +17,11 @@
                     <div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;assets/img/dogs/image2.jpeg&quot;);"></div>
                 </div>
                 <div class="col-12">
-                    <div class="p-5">
+                    <div class="p-lg-5 p-md-5 ">
                         <div class="text-center">
-                            <h4 class="text-dark mb-4">Create an Account!</h4>
+                            <h4 class="text-dark mt-2">Create an Account!</h4>
                         </div>
-                        <form method="POST" action="{{ route('register') }}" class="border rounded p-5" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('register') }}" class="p-lg-5 p-md-5 p-3" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-sm-6 mb-3 mb-sm-0 ">

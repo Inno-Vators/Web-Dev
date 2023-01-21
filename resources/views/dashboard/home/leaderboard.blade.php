@@ -76,13 +76,16 @@
                             @endphp
                             @foreach ($allusers as $alluser)
                             <tr>
-                                <td>{{++$x}}</td>
-                                <td><img class="rounded-circle me-2" width="30" height="30" src="{{asset('storage/'.$alluser->image)}}">{{ $alluser->username }}</td>
-                                <td>{{ $alluser->points }}</td>
-                                <td>{{ $alluser->totalcoins }}</td>
-                                @php
-                                    array_push($generalPosition, $alluser);
-                                @endphp
+                                @if ($alluser->is_admin < 1)
+                                    <td>{{++$x}}</td>
+                                    <td><img class="rounded-circle me-2" width="30" height="30" src="{{asset('storage/'.$alluser->image)}}">{{ $alluser->username }}</td>
+                                    <td>{{ $alluser->points }}</td>
+                                    <td>{{ $alluser->totalcoins }}</td>
+
+                                    @php
+                                        array_push($generalPosition, $alluser);
+                                    @endphp
+                                @endif
                             </tr>
                             @endforeach
 
@@ -96,11 +99,11 @@
                                 <th>Total Coins Earned</th>
                             </tr>
                         </tfoot>
-                        
+
                     </table>
                     {{-- <div class="d-flex justify-content-center">
                         {!! $allusers->links() !!}
-                    
+
                     </div> --}}
                 </div>
             </div>

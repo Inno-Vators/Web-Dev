@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            
-            $table->string('is_admin')->default(0);
+
+            // $table->string('is_admin')->default(0);
         });
     }
 

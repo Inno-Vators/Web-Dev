@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar navbar-expand-lg sticky-top px-lg-5 mx-lg-5 p-0" style="z-index: 0; background:#FFFFFF" >
         <div class="container-fluid py-3">
-          <a class="navbar-brand me-5 fs-4" style="color: #8482FF; font-weigth: 900" href="/">XOVIYA</a>
+          <a class="navbar-brand me-5 fs-4"href="/"><img src="{{asset('img/logo.png')}}" alt="" class="img-fluid"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -115,8 +115,8 @@
                             <span id="footer-icon" class="mx-2"><i class="bi bi-twitter"></i></span>
                             <span id="footer-icon" class="mx-2"><i class="bi bi-telegram"></i></span>
                             <p>Get exclusive assets sent straight to your inbox</p>
-                            <a class="btn btn-sm text-light mt-1" href="{{ route('register') }}" style="background-color: #8482FF;">Sign up</a>
-                            <a class="btn btn-sm text-light mt-1" href="{{ route('login') }}" style="background-color: #8482FF;">Sign In</a>
+                            <a class="btn btn-sm text-light mt-1 mb-2" href="{{ route('register') }}" style="background-color: #8482FF;">Sign up</a>
+                            <a class="btn btn-sm text-light mt-1 mb-2" href="{{ route('login') }}" style="background-color: #8482FF;">Sign In</a>
                         </div>
 
                     </div>

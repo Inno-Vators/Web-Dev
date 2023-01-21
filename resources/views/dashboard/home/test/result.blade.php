@@ -17,10 +17,12 @@
 
                                 @foreach ($course->questions as $question)
                                     <strong>Question {{++$x}}: {{ $question->question}} </strong>
+                                    <br>
+                                    {{$question->answer}}
                                     <div class="mt-3"></div>
                                     <br>
                                     <br>
-                                    {{$question->answer}} <br>
+                                     <br>
                                     {{-- @foreach ($question->answer as $answer)
                                         {{$answer}}
                                     @endforeach --}}

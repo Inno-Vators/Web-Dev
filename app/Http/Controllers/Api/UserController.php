@@ -17,12 +17,6 @@ class UserController extends Controller
     //
     public function createUser(Request $request)
     {
-
-        // $validateRequest = Validator::make(
-        // $request->all(),
-        //     [
-
-        //     ]);
         try {
             $validateUser = Validator::make($request->all(),[
                 'name' => 'required',

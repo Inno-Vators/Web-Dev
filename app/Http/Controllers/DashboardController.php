@@ -64,6 +64,7 @@ class DashboardController extends Controller
         $answers = $user->answers()->get();
         // dd($answered);
         foreach ($answers as $answer) {
+            // dd($answer->option);
             array_push($exempted_questions, $answer->option->question->id);
         }
 
@@ -99,7 +100,7 @@ class DashboardController extends Controller
         $course = Course::findOrFail($id);
         $course->load(['questions' => function($query) use ($user){
             return $query->with(['options','answer' => function($query) use ($user){
-                $query->where('user_id', $user->id)->first();
+                $query->where('user_id', $user->id)->where('course_id', )->first();
             }]);
         }]);
 
@@ -109,8 +110,10 @@ class DashboardController extends Controller
     public function submitTest(Request $request, $id)
     {
         $request->validate([
-            'answer' => 'required',
-            'question' => 'required'
+            'question_id' => 'required',
+            'option_id' => 'required',
+            'status' => 'required',
+            'option' => 'required'
         ]);
 
         // dd($request->all());
@@ -119,10 +122,10 @@ class DashboardController extends Controller
 
         $answer = Answer::create([
             'user_id' => auth()->user()->id,
-            'option_id' => $request->input('answer'),
-            'question_id' => $request->input('question')
-            // 'question_id' =>
-
+            'question_id' => $request->input('question_id'),
+            'option_id' => $request->input('option_id'),
+            'status' => $request->input('status'),
+            'option' => $request->input('option')
         ]);
 
         DB::commit();
